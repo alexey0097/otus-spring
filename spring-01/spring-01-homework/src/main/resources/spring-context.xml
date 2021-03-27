@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="questionResourceReader" class="ru.diasoft.spring.homework.reader.QuestionResourceReader"/>
+    <bean id="questionService" class="ru.diasoft.spring.homework.service.QuestionServiceImpl">
+        <constructor-arg name="questionResourceReader" ref="questionResourceReader"/>
+        <constructor-arg name="questionResource" value="classpath:online-test-en.csv"/>
+    </bean>
+
+</beans>
