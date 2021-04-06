@@ -3,12 +3,11 @@ package ru.diasoft.spring.homework.parser;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.diasoft.spring.homework.dto.QuestionDto;
 
 @Log4j2
 class QuestionParserTest {
 
-    private final QuestionParser questionParser = new QuestionParser();
+    private final QuestionParserImpl questionParserImpl = new QuestionParserImpl();
 
     private final static String QUESTION_LINE = "1;Which two dynasties fought for the throne in the War of the Scarlet and White Rose?";
     private final static String ANSWERS_LINE = "a&Lancaster&York&true|b&Plantagenets&Lancaster&false|c&Tudors&Plantagenets&false";
@@ -16,19 +15,19 @@ class QuestionParserTest {
 
     @Test
     void parseQuestion() {
-        var question = questionParser.parseQuestion(QUESTION_LINE);
+        var question = questionParserImpl.parseQuestion(QUESTION_LINE);
         Assertions.assertTrue(question.isPresent());
     }
 
     @Test
     void parseAnswers() {
-        var answers = questionParser.parseAnswers(ANSWERS_LINE);
+        var answers = questionParserImpl.parseAnswers(ANSWERS_LINE);
         Assertions.assertFalse(answers.isEmpty());
     }
 
     @Test
     void parseAnswer() {
-        var answer = questionParser.parseAnswer(ANSWER_LINE);
+        var answer = questionParserImpl.parseAnswer(ANSWER_LINE);
         Assertions.assertTrue(answer.isPresent());
     }
 }

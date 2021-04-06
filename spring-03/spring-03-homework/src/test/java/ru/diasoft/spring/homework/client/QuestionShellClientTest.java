@@ -4,17 +4,15 @@ import com.google.common.base.Strings;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.diasoft.spring.homework.config.AppConfigTest;
-import ru.diasoft.spring.homework.parser.QuestionParser;
+import ru.diasoft.spring.homework.parser.QuestionParserImpl;
 import ru.diasoft.spring.homework.reader.QuestionResourceReader;
 import ru.diasoft.spring.homework.service.QuestionService;
 import ru.diasoft.spring.homework.service.QuestionServiceImpl;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class QuestionShellClientTest {
 
     private final AppConfigTest appConfigTest = new AppConfigTest();
-    private final QuestionResourceReader questionResourceReader = new QuestionResourceReader(new QuestionParser());
+    private final QuestionResourceReader questionResourceReader = new QuestionResourceReader(new QuestionParserImpl());
     private final QuestionService questionService = new QuestionServiceImpl(appConfigTest, questionResourceReader);
     private final QuestionShellClient questionShellClient = new QuestionShellClient(appConfigTest, questionService);
 

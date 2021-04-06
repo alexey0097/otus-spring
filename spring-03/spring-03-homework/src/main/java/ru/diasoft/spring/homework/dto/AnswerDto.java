@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserAnswerDto {
-    protected Integer numberQuestion;
-    protected String numberAnswer;
+public class AnswerDto {
+    private String number;
+    private String text;
+    private Boolean isCorrect;
+    private String answerDescription;
 }

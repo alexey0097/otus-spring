@@ -5,6 +5,7 @@ import com.google.common.collect.Table;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.shell.core.CommandMarker;
+import org.springframework.shell.core.annotation.CliAvailabilityIndicator;
 import org.springframework.shell.core.annotation.CliCommand;
 import org.springframework.shell.core.annotation.CliOption;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,8 @@ public class QuestionShellClient implements CommandMarker {
     private final AppConfig appConfig;
     private final QuestionService questionService;
 
+    private boolean questionIsSed = false;
+
     @CliCommand(value = { "start-test", "st" })
     public String startTest(
             @CliOption(key = "firstName") String firstName,
@@ -52,7 +55,14 @@ public class QuestionShellClient implements CommandMarker {
             });
         });
 
+        questionIsSed = true;
+
         return stringBuffer.toString();
+    }
+
+    @CliAvailabilityIndicator(value = "end-test")
+    public boolean questionIsSed() {
+        return questionIsSed;
     }
 
     @CliCommand(value = { "end-test", "et" })
@@ -81,7 +91,14 @@ public class QuestionShellClient implements CommandMarker {
             if (isCorrect != null && isCorrect) countRightAnswer++;
         }
 
-        String result = minRightAnswers <= countRightAnswer ? "GOOD" : "BAD";
+        String result;
+
+        if (minRightAnswers <= countRightAnswer) {
+            result = "GOOD";
+            questionIsSed = false;
+        } else {
+            result = "BAD";
+        }
 
         return String.format(TEMPLATE_RESULTS, countRightAnswer, result);
     }

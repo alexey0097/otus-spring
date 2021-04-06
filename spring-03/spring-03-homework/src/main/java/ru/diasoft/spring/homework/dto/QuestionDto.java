@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuestionDto {
-    protected Integer number;
-    protected String text;
-    protected List<VariantAnswerDto> answers = new ArrayList<>();
+    private Integer number;
+    private String text;
+    private List<AnswerDto> answers = new ArrayList<>();
 }

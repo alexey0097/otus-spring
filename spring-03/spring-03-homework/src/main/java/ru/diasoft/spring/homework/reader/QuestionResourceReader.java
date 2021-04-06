@@ -18,13 +18,10 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Component
 @Log4j2
+@RequiredArgsConstructor
 public class QuestionResourceReader implements ResourceReader<List<QuestionDto>> {
 
     private final QuestionParser questionParser;
-
-    public QuestionResourceReader(QuestionParser questionParser) {
-        this.questionParser = questionParser;
-    }
 
     @Override
     public List<QuestionDto> read(String url) {
