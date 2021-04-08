@@ -1,0 +1,82 @@
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 16:55:23
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 16:59:28
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 17:05:01
+help
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 17:06:45
+help
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 17:07:59
+help
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 17:12:01
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 17:12:30
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 17:23:35
+wg --url dsxdsd
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 17:25:02
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 17:29:32
+// [failed] fa
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 17:30:33
+// [failed] fa
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:05:57
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:07:03
+wg --url sadasda
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:07:39
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:08:23
+// [failed] fa
+// [failed] fa
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:09:13
+fa
+// null 1.2.0.RELEASE log opened at 2021-04-03 18:11:26
+help
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:26:24
+st --userFio Alexey
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:28:33
+st --userFio Alexey
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:29:58
+st --userFio Alex
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:32:05
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:32:39
+st --userName Alex
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:34:30
+st --userName Alex
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:38:36
+st --userName Alex
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:39:15
+st --userName Alex
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:39:42
+st --userName Alexey
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:45:30
+st --userName Alexey
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 18:50:11
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:04:10
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:04:29
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:08:11
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:09:25
+et --answers a,b,c,d
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:27:59
+// [failed] et --answers a,a,a,a,b
+// [failed] et --answers a,a,a,a,b
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:30:06
+// [failed] et --answers a,b,c,d,a
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:30:47
+// [failed] et --answers a,a,a,a,b
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:31:58
+et --answers a,b,a,b,a,b,a,b
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:33:31
+st --userName Alex
+et --answers a,a,v,b,c,a,c
+et --answers a,a,a,a,a,a,a,a,a,a,a,a,a
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:35:07
+start-test --userName Alex
+end-test --answers a,b,c,a,b,c,a,b,c,a,b,c
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-03 19:40:03
+start-test --userName Alexey
+end-test --answers a,b,c,a,b,c,a,b,c,a,b,c
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-04 13:53:23
+start-test --firstName Zemtsov --lastName Alexey
+end-test --answers a,b,c,b,a,b,a,c
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-06 13:41:06
+start-test --firstName Zemtsov --lastName Alexey
+end-test --answers a,b,c,b,a,b,a,c
+end-test --answers a,b,c,b,a,b,a,c
+// Spring Shell 1.2.0.RELEASE log opened at 2021-04-06 13:42:02
+start-test --firstName Zemtsov --lastName Alexey
+end-test --answers a,b,c,b,a,b,a,c
