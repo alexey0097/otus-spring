@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +21,21 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 @Log4j2
-@ExtendWith({SpringExtension.class, MockitoExtension.class})
-@ContextConfiguration(classes = AppConfig.class)
+@ExtendWith({MockitoExtension.class})
 @DisplayName("Сервис для поиска вопросов")
 class QuestionServiceImplTest {
 
-    @Autowired
+    @Mock
     private AppConfig appConfig;
 
     @Mock
     private QuestionResourceReader questionResourceReader;
 
-    private QuestionService questionService;
+    @InjectMocks
+    private QuestionServiceImpl questionService;
 
     @BeforeEach
     void init() {
@@ -56,7 +58,8 @@ class QuestionServiceImplTest {
         given(questionResourceReader.read(any()))
                 .willReturn(Arrays.asList(question));
 
-        questionService = new QuestionServiceImpl(appConfig, questionResourceReader);
+        when(appConfig.getPathToQuestions())
+                .thenReturn("online-test-en.csv");
     }
 
     @DisplayName("получает список вопросов")
