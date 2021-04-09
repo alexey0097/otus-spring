@@ -7,29 +7,39 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.diasoft.spring.homework.config.AppConfig;
+import ru.diasoft.spring.homework.config.QuestionProperties;
+import ru.diasoft.spring.homework.config.TestConfig;
 import ru.diasoft.spring.homework.dto.AnswerDto;
 import ru.diasoft.spring.homework.dto.QuestionDto;
-import ru.diasoft.spring.homework.parser.QuestionParserImpl;
-import ru.diasoft.spring.homework.reader.QuestionResourceReader;
+import ru.diasoft.spring.homework.service.MessageSourceServiceImpl;
 import ru.diasoft.spring.homework.service.QuestionService;
-import ru.diasoft.spring.homework.service.QuestionServiceImpl;
 
 import java.util.Arrays;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 @Log4j2
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
-@ContextConfiguration(classes = {AppConfig.class, QuestionShellClient.class})
+@ContextConfiguration(classes = {
+        AppConfig.class,
+        TestConfig.class,
+        QuestionShellClient.class,
+        MessageSourceServiceImpl.class,
+        QuestionProperties.class
+}, initializers = {
+        ConfigFileApplicationContextInitializer.class
+})
 @DisplayName("Сервис для обработки вопросов")
 class QuestionShellClientTest {
 

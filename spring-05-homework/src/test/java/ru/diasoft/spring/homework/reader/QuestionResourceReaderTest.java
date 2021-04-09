@@ -7,10 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.diasoft.spring.homework.config.AppConfig;
+import ru.diasoft.spring.homework.config.QuestionProperties;
+import ru.diasoft.spring.homework.config.TestConfig;
 import ru.diasoft.spring.homework.dto.AnswerDto;
 import ru.diasoft.spring.homework.dto.QuestionDto;
 import ru.diasoft.spring.homework.parser.QuestionParser;
@@ -24,12 +27,19 @@ import static org.mockito.Mockito.when;
 
 @Log4j2
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
-@ContextConfiguration(classes = {AppConfig.class, QuestionResourceReader.class})
+@ContextConfiguration(classes = {
+        AppConfig.class,
+        TestConfig.class,
+        QuestionProperties.class,
+        QuestionResourceReader.class
+}, initializers = {
+        ConfigFileApplicationContextInitializer.class
+})
 @DisplayName("Читатель вопросов из ресурса")
 class QuestionResourceReaderTest {
 
     @Autowired
-    private AppConfig appConfig;
+    private QuestionProperties questionProperties;
 
     @MockBean
     private QuestionParser questionParser;
@@ -62,7 +72,7 @@ class QuestionResourceReaderTest {
     @DisplayName("создержит вопросы")
     @Test
     void shouldQuestions() {
-        var listQuestions = questionResourceReader.read(appConfig.getPathToQuestions());
+        var listQuestions = questionResourceReader.read(questionProperties.getPathToQuestions());
         assertFalse(listQuestions.isEmpty());
     }
 }

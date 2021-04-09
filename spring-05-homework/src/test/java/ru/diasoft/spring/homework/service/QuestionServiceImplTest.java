@@ -7,10 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.diasoft.spring.homework.config.AppConfig;
+import ru.diasoft.spring.homework.config.QuestionProperties;
+import ru.diasoft.spring.homework.config.TestConfig;
 import ru.diasoft.spring.homework.dto.AnswerDto;
 import ru.diasoft.spring.homework.dto.QuestionDto;
 import ru.diasoft.spring.homework.reader.QuestionResourceReader;
@@ -23,7 +26,14 @@ import static org.mockito.Mockito.when;
 
 @Log4j2
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
-@ContextConfiguration(classes = {AppConfig.class, QuestionServiceImpl.class})
+@ContextConfiguration(classes = {
+        AppConfig.class,
+        TestConfig.class,
+        QuestionServiceImpl.class,
+        QuestionProperties.class
+}, initializers = {
+        ConfigFileApplicationContextInitializer.class
+})
 @DisplayName("Сервис для поиска вопросов")
 class QuestionServiceImplTest {
 
