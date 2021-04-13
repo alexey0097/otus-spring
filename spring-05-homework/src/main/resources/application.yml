@@ -1,0 +1,9 @@
+config:
+  questions:
+    count: 12
+    min: 3
+    locale: 'ru'
+    path: online-test-${config.questions.locale}.csv
+spring:
+  banner:
+    location: classpath:banner.txt

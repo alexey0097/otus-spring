@@ -1,0 +1,19 @@
+1617977882409:start-test --firstName Zemtsov --lastName Alexey
+1617978085738:start-test --firstName Zemtsov
+1617978108909:start-test Zemtsov Alexey
+1617978154882:end-test 1,2,3,1,3,2
+1617978167232:end-test 1,2,3,1,2,3,2,
+1617978203487:end-test 1,2,3,1,2,3,1
+1617978500758:endTest 1,2,3
+1617978512279:startTest Alex Zemtsov
+1617978523752:help
+1617978540740:end-test 1,2,3,1
+1617980620742:start-test Alex Zemtsov
+1617980634308:end-test 1,2,3,1
+1617999546950:start-test al asd
+1618000465198:end-test a,v,a,b,a
+1618000472578:start-test a a
+1618000661691:end-test a,v,b,a,a,a,a,b,a,
+1618000681488:end-test asdsad
+1618000687395:start-test a a
+1618000708260:end-test a,b,c,a,b,c,a,a,a
