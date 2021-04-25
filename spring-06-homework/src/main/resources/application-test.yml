@@ -1,0 +1,6 @@
+config:
+  questions:
+    count: 12
+    min: 3
+    locale: 'ru'
+    path: online-test-${config.questions.locale}.csv
