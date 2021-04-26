@@ -1,0 +1,23 @@
+server:
+  port: 9080
+config:
+  locale: 'ru'
+spring:
+  shell:
+    interactive:
+      enabled: true
+  banner:
+    location: classpath:banner.txt
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: ""
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
+logging:
+  level:
+    org.springframework.jdbc.core: INFO
