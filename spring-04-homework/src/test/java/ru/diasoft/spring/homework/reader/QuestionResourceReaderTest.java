@@ -1,17 +1,14 @@
 package ru.diasoft.spring.homework.reader;
 
 import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.diasoft.spring.homework.config.AppConfig;
 import ru.diasoft.spring.homework.dto.AnswerDto;
 import ru.diasoft.spring.homework.dto.QuestionDto;
@@ -21,16 +18,17 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 @Log4j2
-@ExtendWith({SpringExtension.class, MockitoExtension.class})
-@ContextConfiguration(classes = AppConfig.class)
+@ExtendWith({MockitoExtension.class})
 @DisplayName("Читатель вопросов из ресурса")
 class QuestionResourceReaderTest {
 
-    @Autowired
+    @Mock
     private AppConfig appConfig;
 
     @Mock
@@ -59,12 +57,25 @@ class QuestionResourceReaderTest {
 
         given(questionParser.parseQuestion(any()))
                 .willReturn(Optional.of(question));
+
+        when(appConfig.getPathToQuestions())
+                .thenReturn("online-test-en.csv");
     }
 
     @DisplayName("создержит вопросы")
     @Test
+    @Order(1)
     void shouldQuestions() {
         var listQuestions = questionResourceReader.read(appConfig.getPathToQuestions());
         assertFalse(listQuestions.isEmpty());
     }
+
+    @DisplayName("количество вопросов > 3")
+    @Test
+    @Order(2)
+    void shouldCountQuestionsMore3() {
+        var listQuestions = questionResourceReader.read(appConfig.getPathToQuestions());
+        assertTrue(listQuestions.size() > 3);
+    }
+
 }

@@ -7,36 +7,31 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.diasoft.spring.homework.config.AppConfig;
 import ru.diasoft.spring.homework.dto.AnswerDto;
 import ru.diasoft.spring.homework.dto.QuestionDto;
-import ru.diasoft.spring.homework.parser.QuestionParserImpl;
-import ru.diasoft.spring.homework.reader.QuestionResourceReader;
 import ru.diasoft.spring.homework.service.QuestionService;
-import ru.diasoft.spring.homework.service.QuestionServiceImpl;
 
 import java.util.Arrays;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 @Log4j2
-@ExtendWith({SpringExtension.class, MockitoExtension.class})
-@ContextConfiguration(classes = AppConfig.class)
+@ExtendWith({MockitoExtension.class})
 @DisplayName("Сервис для обработки вопросов")
 class QuestionShellClientTest {
 
-    @Autowired
+    @Mock
     private AppConfig appConfig;
 
     @Mock
     private QuestionService questionService;
 
+    @InjectMocks
     private QuestionShellClient questionShellClient;
 
     @BeforeEach
@@ -60,7 +55,8 @@ class QuestionShellClientTest {
         given(questionService.findAll())
                 .willReturn(Arrays.asList(question));
 
-        questionShellClient = new QuestionShellClient(appConfig, questionService);
+        when(appConfig.getCountQuestions())
+                .thenReturn(12);
     }
 
     @DisplayName("запускает тестирование")
@@ -73,6 +69,12 @@ class QuestionShellClientTest {
     @DisplayName("завершает тестирование")
     @Test
     void endTest() {
+        when(appConfig.getCountQuestions())
+                .thenReturn(5);
+
+        when(appConfig.getMinRightAnswers())
+                .thenReturn(3);
+
         var questions = questionShellClient.startTest("Zemtsov", "Alexey");
         var text = questionShellClient.endTest("a,b,c,d,c,a,c");
         Assertions.assertFalse(Strings.isNullOrEmpty(text));
