@@ -28,14 +28,12 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public Book save(Book book) {
         em.persist(book);
-        em.flush();
         return book;
     }
 
     @Override
     public Book update(Book book) {
         em.merge(book);
-        em.flush();
         return book;
     }
 
@@ -47,9 +45,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public List<Book> findAll() {
-        final EntityGraph<?> entityGraph = em.getEntityGraph("BooksGraph");
         return em.createQuery("select b from Book b ", Book.class)
-                .setHint("javax.persistence.fetchgraph", entityGraph)
                 .getResultList();
     }
 

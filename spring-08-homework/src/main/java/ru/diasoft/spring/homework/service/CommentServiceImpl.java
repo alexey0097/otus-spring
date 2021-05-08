@@ -21,19 +21,19 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.count();
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public Comment update(Comment comment) {
         return commentRepository.update(comment);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public void deleteById(Long id) {
         commentRepository.deleteById(id);

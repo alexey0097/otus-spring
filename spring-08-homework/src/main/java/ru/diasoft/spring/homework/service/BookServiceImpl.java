@@ -21,19 +21,19 @@ public class BookServiceImpl implements BookService {
         return bookRepository.count();
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public Book save(Book book) {
         return bookRepository.save(book);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public Book update(Book book) {
         return bookRepository.update(book);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public void deleteById(Long id) {
         bookRepository.deleteById(id);

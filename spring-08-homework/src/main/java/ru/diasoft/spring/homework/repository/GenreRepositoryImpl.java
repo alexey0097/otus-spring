@@ -27,14 +27,12 @@ public class GenreRepositoryImpl implements GenreRepository {
     @Override
     public Genre save(Genre genre) {
         em.persist(genre);
-        em.flush();
         return genre;
     }
 
     @Override
     public Genre update(Genre genre) {
         em.merge(genre);
-        em.flush();
         return genre;
     }
 

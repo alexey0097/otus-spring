@@ -26,14 +26,12 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public Comment save(Comment comment) {
         em.persist(comment);
-        em.flush();
         return comment;
     }
 
     @Override
     public Comment update(Comment comment) {
         em.merge(comment);
-        em.flush();
         return comment;
     }
 

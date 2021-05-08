@@ -27,14 +27,12 @@ public class AuthorRepositoryImpl implements AuthorRepository {
     @Override
     public Author save(Author author) {
         em.persist(author);
-        em.flush();
         return author;
     }
 
     @Override
     public Author update(Author author) {
         em.merge(author);
-        em.flush();
         return author;
     }
 

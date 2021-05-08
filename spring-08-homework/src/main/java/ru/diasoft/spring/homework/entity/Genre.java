@@ -12,9 +12,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "GENRES")
 public class Genre {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "GENRE_ID")
     private Long genreId;
+
     @Column(name = "GENRE_NAME")
     private String genreName;
 }
+

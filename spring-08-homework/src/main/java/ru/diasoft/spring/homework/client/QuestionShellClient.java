@@ -11,6 +11,9 @@ import ru.diasoft.spring.homework.entity.Book;
 import ru.diasoft.spring.homework.entity.Comment;
 import ru.diasoft.spring.homework.service.*;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @ShellComponent
@@ -106,9 +109,18 @@ public class QuestionShellClient {
         comment.setUserName(userName);
         comment.setText(text);
         bookService.findById(bookId).ifPresent(book -> {
-            book.getComments().add(comment);
-            bookService.update(book);
+            comment.setBook(book);
+            commentService.save(comment);
         });
+    }
+    @ShellMethod(key = {"facbbi","find-all-comment-by-book-id"}, value = "Method find all comments")
+    @ShellMethodAvailability(value = "isAuthUser")
+    public String findAllCommentByBookId(@ShellOption Long bookId) {
+        List<Comment> commentList = new ArrayList<>();
+        bookService.findById(bookId).ifPresent(book -> {
+            commentList.addAll(book.getComments());
+        });
+        return commentList.toString();
     }
 
     private Availability isAuthUser() {

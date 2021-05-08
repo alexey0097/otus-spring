@@ -2,6 +2,7 @@ package ru.diasoft.spring.homework.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.diasoft.spring.homework.entity.Author;
 import ru.diasoft.spring.homework.repository.AuthorRepository;
 
@@ -19,16 +20,19 @@ public class AuthorServiceImpl implements AuthorService {
         return authorRepository.count();
     }
 
+    @Transactional
     @Override
     public Author save(Author author) {
         return authorRepository.save(author);
     }
 
+    @Transactional
     @Override
     public Author update(Author author) {
         return authorRepository.update(author);
     }
 
+    @Transactional
     @Override
     public void deleteById(Long id) {
         authorRepository.deleteById(id);
