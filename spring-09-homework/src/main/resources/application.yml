@@ -1,0 +1,34 @@
+server:
+  port: 9080
+config:
+  locale: 'ru'
+spring:
+  shell:
+    interactive:
+      enabled: true
+  banner:
+    location: classpath:banner.txt
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: ""
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        format_sql: true
+
+    show-sql: true
+logging:
+  level:
+    org.springframework.jdbc.core: INFO
