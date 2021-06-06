@@ -2,13 +2,12 @@ package ru.diasoft.spring.homework.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.diasoft.spring.homework.entity.Book;
+import ru.diasoft.spring.homework.exception.InternalServerException;
 import ru.diasoft.spring.homework.repository.BookRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +45,7 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public Optional<Book> findById(Long id) {
-        return bookRepository.findById(id);
+    public Book findById(Long id) {
+        return bookRepository.findById(id).orElseThrow( () -> new InternalServerException("domain not found..."));
     }
 }

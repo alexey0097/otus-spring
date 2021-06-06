@@ -1,6 +1,7 @@
 package ru.diasoft.spring.homework.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,14 @@ import ru.diasoft.spring.homework.service.AuthorService;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = AuthorController.class)
+@DisplayName("Контроллер для авторов")
 class AuthorControllerTest {
 
     @Autowired private MockMvc mockMvc;
@@ -29,6 +32,7 @@ class AuthorControllerTest {
     @MockBean
     private AuthorService authorService;
 
+    @DisplayName("возвращает список авторов")
     @Test
     void findAllAuthors() throws Exception {
 
@@ -41,15 +45,35 @@ class AuthorControllerTest {
 
         when(authorService.findAll()).thenReturn(authors);
 
-        final var expectedResponseBody = objectMapper.writeValueAsString(authors);
+        final String expectedResponseBody = objectMapper.writeValueAsString(authors);
 
-        final var mvcResult = mockMvc.perform(get("/api/v1/authors")
+        final MvcResult mvcResult = mockMvc.perform(get("/api/v1/authors")
             .contentType("application/json")
             .content(expectedResponseBody))
             .andExpect(status().isOk())
             .andReturn();
 
-        final var actualResponseBody = mvcResult.getResponse().getContentAsString();
+        final String actualResponseBody = mvcResult.getResponse().getContentAsString();
+
+        assertThat(actualResponseBody).isEqualToIgnoringWhitespace(expectedResponseBody);
+    }
+
+    @DisplayName("возвращает автора по его идентификатору")
+    @Test
+    void findAllAuthorById() throws Exception {
+        final var author = new Author(1L, "Гоголь", "Николай", "Васильевич");
+
+        when(authorService.findById(any())).thenReturn(author);
+
+        final String expectedResponseBody = objectMapper.writeValueAsString(author);
+
+        final MvcResult mvcResult = mockMvc.perform(get("/api/v1/author/1")
+                .contentType("application/json")
+                .content(expectedResponseBody))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        final String actualResponseBody = mvcResult.getResponse().getContentAsString();
 
         assertThat(actualResponseBody).isEqualToIgnoringWhitespace(expectedResponseBody);
     }

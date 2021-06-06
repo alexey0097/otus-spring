@@ -74,8 +74,8 @@ class BookServiceImplTest {
         book.setBookName("BookName");
         when(bookRepository.findById(any())).thenReturn(Optional.of(book));
 
-        Optional<Book> optionalBook = bookService.findById(1L);
-        assertThat(optionalBook).isPresent();
+        Book book1 = bookService.findById(1L);
+        assertThat(book1).isNotNull();
     }
 
 }

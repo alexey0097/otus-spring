@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.diasoft.spring.homework.entity.Genre;
+import ru.diasoft.spring.homework.exception.InternalServerException;
 import ru.diasoft.spring.homework.repository.GenreRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,7 +44,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public Optional<Genre> findById(Long id) {
-        return genreRepository.findById(id);
+    public Genre findById(Long id) {
+        return genreRepository.findById(id).orElseThrow( () -> new InternalServerException("genre not found..."));
     }
 }

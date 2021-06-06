@@ -74,7 +74,7 @@ class GenreServiceImplTest {
         genre.setGenreName("GenreName");
         when(genreRepository.findById(any())).thenReturn(Optional.of(genre));
 
-        Optional<Genre> optionalGenre = genreService.findById(1L);
-        assertThat(optionalGenre).isPresent();
+        Genre genre1 = genreService.findById(1L);
+        assertThat(genre1).isNotNull();
     }
 }

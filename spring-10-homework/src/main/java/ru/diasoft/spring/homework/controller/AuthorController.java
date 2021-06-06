@@ -16,13 +16,13 @@ public class AuthorController {
 
     private final AuthorService authorService;
 
-    @GetMapping(value = "/api/v1/authors", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/api/v1/authors", produces = "application/json;charset=UTF-8")
     public List<Author> findAuthors(){
         return authorService.findAll();
     }
 
-    @GetMapping("/api/v1/author/{id}")
-    public Author findAuthors(@PathVariable Long id){
+    @GetMapping(value = "/api/v1/author/{id}", produces = "application/json;charset=UTF-8")
+    public Author findAuthorById(@PathVariable Long id){
         return authorService.findById(id);
     }
 

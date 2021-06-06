@@ -11,5 +11,7 @@ public interface CommentService {
     Comment update(Comment comment);
     void deleteById(Long id);
     List<Comment> findAll();
+    List<Comment> findAllByBookId(Long bookId);
     Optional<Comment> findById(Long id);
+    Comment saveByBookId(Long bookId, Comment comment);
 }

@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import ru.diasoft.spring.homework.entity.Book;
 import ru.diasoft.spring.homework.entity.Comment;
 
 import java.util.List;
@@ -20,8 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Репозиторий комментариев")
 class CommentRepositoryImplTest {
 
-    @Autowired
-    private CommentRepository commentRepository;
+    @Autowired private CommentRepository commentRepository;
+    @Autowired private BookRepository bookRepository;
 
     @Test
     @DisplayName("считает количество комментариев")
@@ -110,5 +111,22 @@ class CommentRepositoryImplTest {
 
         Optional<Comment> optional2 = commentRepository.findById(comment.getCommentId());
         assertThat(optional2).isNotPresent();
+    }
+
+    @Test
+    @DisplayName("ищет комментарий по идентификатору книги")
+    void findByBookId() {
+        Book book = new Book();
+        book.setBookName("testNameFindById");
+        bookRepository.save(book);
+
+        Comment comment = new Comment();
+        comment.setUserName("userName");
+        comment.setText("text");
+        comment.setBook(book);
+        commentRepository.save(comment);
+
+        List<Comment> optional = commentRepository.findAllByBookId(comment.getBook().getBookId());
+        assertThat(optional).isNotEmpty();
     }
 }

@@ -6,7 +6,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ru.diasoft.spring.homework.entity.Book;
 import ru.diasoft.spring.homework.entity.Comment;
+import ru.diasoft.spring.homework.repository.BookRepository;
 import ru.diasoft.spring.homework.repository.CommentRepository;
 
 import java.util.Collections;
@@ -23,6 +25,9 @@ class CommentServiceImplTest {
     
     @Mock
     private CommentRepository commentRepository;
+
+    @Mock
+    private BookRepository bookRepository;
 
     @InjectMocks
     private CommentServiceImpl commentService;
@@ -82,4 +87,30 @@ class CommentServiceImplTest {
         assertThat(optionalComment).isPresent();
     }
 
+    @Test
+    @DisplayName("ищет комментарии")
+    void findAllByBookId() {
+        Comment comment = new Comment();
+        comment.setUserName("userName");
+        comment.setText("CommentName");
+        when(commentRepository.findAllByBookId(any())).thenReturn(Collections.singletonList(comment));
+
+        List<Comment> list = commentService.findAllByBookId(1L);
+        assertThat(list).isNotEmpty();
+    }
+
+    @Test
+    void saveByBookId() {
+        Comment comment = new Comment();
+        comment.setUserName("userName");
+        comment.setText("CommentName");
+        when(commentRepository.save(comment)).thenReturn(comment);
+
+        Book book = new Book();
+        book.setBookName("BookName");
+        when(bookRepository.findById(any())).thenReturn(Optional.of(book));
+
+        Comment comment1 = commentService.saveByBookId(1L, comment);
+        assertThat(comment).isEqualTo(comment1);
+    }
 }
