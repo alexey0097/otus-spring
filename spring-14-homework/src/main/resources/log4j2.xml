@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+
+	<Properties>
+		<Property name="DEBUG_LEVEL" value="${sys:DEBUG_LEVEL:-INFO}"/>
+		<Property name="DIR_LOGS" value="${sys:DIR_LOGS:-logs}"/>
+		<Property name="LOG_PATTERN" value="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+		<Property name="FILE_PATTERN" value="${sys:DIR_LOGS:-logs}/dqadc-%d{yyyy-MM-dd-HH}-%i.log"/>
+	</Properties>
+
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="${LOG_PATTERN}" />
+		</Console>
+		<RollingFile name="FILE_LOGGER" fileName="${DIR_LOGS}/logger.log" filePattern="${FILE_PATTERN}">
+			<PatternLayout pattern="${LOG_PATTERN}"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"/>
+				<SizeBasedTriggeringPolicy size="100 MB"/>
+			</Policies>
+
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		<Root level="${DEBUG_LEVEL}">
+			<AppenderRef ref="CONSOLE"/>
+			<AppenderRef ref="FILE_LOGGER"/>
+		</Root>
+	</Loggers>
+
+</Configuration>
