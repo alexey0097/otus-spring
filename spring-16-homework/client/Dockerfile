@@ -4,7 +4,7 @@ EXPOSE 9080
 
 MAINTAINER Zemtsov Alexey Vladimirovich <zemtsov1997@yandex.ru>
 
-WORKDIR /opt/auth-service
+WORKDIR /opt/client
 
 ADD target/client-*.jar client.jar
 

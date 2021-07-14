@@ -4,7 +4,7 @@ EXPOSE 9080
 
 MAINTAINER Zemtsov Alexey Vladimirovich <zemtsov1997@yandex.ru>
 
-WORKDIR /opt/auth-service
+WORKDIR /opt/server
 
 ADD target/server-*.jar server.jar
 
