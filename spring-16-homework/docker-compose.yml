@@ -11,8 +11,6 @@ services:
     restart: always
     ports:
       - 9080:9080
-    volumes:
-      - /opt/server/logs:/opt/server/logs
     networks:
       - lan_microservices
 
@@ -24,7 +22,5 @@ services:
       EUREKA_URI: http://server:9080
     ports:
       - 9080:9080
-    volumes:
-      - /opt/client/logs:/opt/client/logs
     networks:
       - lan_microservices
