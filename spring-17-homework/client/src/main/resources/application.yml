@@ -1,0 +1,37 @@
+book-service:
+  url: ${BOOK_SERVICE_URL}
+server:
+  port: 9080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+spring:
+  kafka:
+    bootstrap-servers: 10.10.3.93:30326
+  cloud:
+    stream:
+      bindings:
+        AuthorSubChannel:
+          group: group1
+          destination: author.output.channel
+        AuthorPubChannel:
+          group: group1
+          destination: author.input.channel
+      kafka:
+        binder:
+          replication-factor: 1
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    root: ${LOGGING_ROOT_LEVEL:INFO}
+    org.springframework.web: ${LOGGING_WEB_LEVEL:ERROR}
+    org.hibernate: ${LOGGING_JPA_LEVEL:DEBUG}
