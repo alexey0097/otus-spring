@@ -1,0 +1,38 @@
+server:
+  port: 9080
+config:
+  locale: 'ru'
+spring:
+  shell:
+    interactive:
+      enabled: true
+  banner:
+    location: classpath:banner.txt
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: ""
+  h2:
+    console:
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    properties:
+      hibernate:
+        format_sql: true
+
+    show-sql: true
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    root: ${LOGGING_ROOT_LEVEL:DEBUG}
+    org.springframework.web: ${LOGGING_WEB_LEVEL:ERROR}
+    org.hibernate: ${LOGGING_JPA_LEVEL:DEBUG}

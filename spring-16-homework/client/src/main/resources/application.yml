@@ -1,0 +1,22 @@
+book-service:
+  url: ${BOOK_SERVICE_URL}
+server:
+  port: 9080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    root: ${LOGGING_ROOT_LEVEL:DEBUG}
+    org.springframework.web: ${LOGGING_WEB_LEVEL:ERROR}
+    org.hibernate: ${LOGGING_JPA_LEVEL:DEBUG}
